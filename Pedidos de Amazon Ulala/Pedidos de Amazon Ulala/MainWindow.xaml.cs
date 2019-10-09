@@ -28,7 +28,7 @@ namespace Pedidos_de_Amazon_Ulala
         {
             InitializeComponent();
             con = new OleDbConnection();
-            con.ConnectionString = "Provider=Microsoft.Jet.Oledb.4.0; Data Source=" + AppDomain.CurrentDomain.BaseDirectory + "\\Pedidos-Amazon.mdb";
+            con.ConnectionString = "Provider=Microsoft.Jet.Oledb.4.0; Data Source=" + AppDomain.CurrentDomain.BaseDirectory + "\\PedidosAmazon.mdb";
             MostrarDatos();
         }
         private void MostrarDatos()
@@ -74,13 +74,13 @@ namespace Pedidos_de_Amazon_Ulala
             if (gvDatos.SelectedItems.Count > 0)
             {
                 DataRowView row = (DataRowView)gvDatos.SelectedItems[0];
-                txtPedido.Text = row["Id"].ToString();
-                txtProducto.Text = row["Nombre"].ToString();
-                txtProducto.Text = row["Nombre"].ToString();
-                cbForma.Text = row["Genero"].ToString();
-                cbColor.Text = row["Genero"].ToString();
-                cbTalla.Text = row["Genero"].ToString();
-                txtDestinado.Text = row["Telefono"].ToString();
+                txtPedido.Text = row["IdPedido"].ToString();
+                txtProducto.Text = row["Producto"].ToString();
+                txtPrecio.Text = row["Precio"].ToString();
+                cbForma.Text = row["Forma"].ToString();
+                cbColor.Text = row["Color"].ToString();
+                cbTalla.Text = row["Talla"].ToString();
+                txtDestinado.Text = row["Comprador"].ToString();
                 txtTelefono.Text = row["Telefono"].ToString();
                 txtDireccion.Text = row["Direccion"].ToString();
                 txtPedido.IsEnabled = false;
@@ -101,7 +101,7 @@ namespace Pedidos_de_Amazon_Ulala
                 if (con.State != ConnectionState.Open)
                     con.Open();
                 cmd.Connection = con;
-                cmd.CommandText = "delete from Pedidos where Id=" + row["Id"].ToString();
+                cmd.CommandText = "delete from Pedidos where txtPedido=" + row["txtPedido"].ToString();
                 cmd.ExecuteNonQuery();
                 MostrarDatos();
                 MessageBox.Show("Pedido Eliminado (cancelado)");
@@ -127,41 +127,20 @@ namespace Pedidos_de_Amazon_Ulala
             {
                 if (txtPedido.IsEnabled == true)
                 {
-                    if (cbForma.Text != "Forma de Pago")
-                    {
-                        if (cbColor.Text != "Selecciona Color")
-                        {
-                            if (cbTalla.Text != "Selecciona Talla")
-                            {
-                                cmd.CommandText = "insert into Pedidos(Producto,Precio,Forma,Color,Talla,Comprador,Telefono,Direccion) " +
-                                    "Values(" + txtProducto.Text + ",'" + txtPrecio.Text + "','" + cbForma.Text + "','" + cbColor.Text + ",'" + cbTalla + "','"
-                                    + txtDestinado + "','" + txtTelefono.Text + ",'" + txtDireccion.Text + "')";
-                                cmd.ExecuteNonQuery();
-                                MostrarDatos();
-                                MessageBox.Show("Nuevo pedido agregado correctamente...");
-                                LimpiaTodo();
-
-                            }
-                            else
-                            {
-                                MessageBox.Show("Selecciona la Talla");
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Selecciona el Color");
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Selecciona forma de Pago");
-                    }   
+                    cmd.CommandText = "insert into Pedidos(IdPedido,Producto,Precio,Forma,Color,Talla,Comprador,Telefono,Direccion) " +
+                        "Values(" + txtPedido.Text + ",'" + txtProducto.Text + "','" + txtPrecio.Text + "','"
+                        + cbForma.Text + "','" + cbColor.Text + "','" + cbTalla.Text + "','"
+                        + txtDestinado.Text + "'," + txtTelefono.Text + ",'" + txtDireccion.Text + "')";
+                    cmd.ExecuteNonQuery();
+                    MostrarDatos();
+                    MessageBox.Show("Nuevo pedido agregado correctamente...");
+                    LimpiaTodo();       
                 }
                 else
                 {
-                    cmd.CommandText = "update Pedidos set Nombre='" + txtProducto.Text + "',Precio='" + txtPrecio.Text +
-                         ",Forma='" + cbForma.Text + ",Color='" + cbColor.Text + ",Talla='" + cbTalla.Text + ",Destinado='" + txtDestinado.Text + 
-                        "',Telefono=" + txtTelefono.Text + ",Direccion='" + txtDireccion.Text + "' where Id=" + txtPedido.Text;
+                    cmd.CommandText = "update Pedidos set Producto='" + txtProducto.Text + "',Precio='" + txtPrecio.Text +
+                         "',Forma='" + cbForma.Text + "',Color='" + cbColor.Text + "',Talla='" + cbTalla.Text + "',Comprador='" + txtDestinado.Text + 
+                        "',Telefono='" + txtTelefono.Text + "',Direccion='" + txtDireccion.Text + "' where Id=" + txtPedido.Text;
                     cmd.ExecuteNonQuery();
                     MostrarDatos();
                     MessageBox.Show("Datos del alumno Actualizados...");
