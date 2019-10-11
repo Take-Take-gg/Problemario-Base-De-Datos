@@ -101,7 +101,7 @@ namespace Pedidos_de_Amazon_Ulala
                 if (con.State != ConnectionState.Open)
                     con.Open();
                 cmd.Connection = con;
-                cmd.CommandText = "delete from Pedidos where txtPedido=" + row["txtPedido"].ToString();
+                cmd.CommandText = "delete from Pedidos where Id=" + row["Id"].ToString();
                 cmd.ExecuteNonQuery();
                 MostrarDatos();
                 MessageBox.Show("Pedido Eliminado (cancelado)");
@@ -140,10 +140,10 @@ namespace Pedidos_de_Amazon_Ulala
                 {
                     cmd.CommandText = "update Pedidos set Producto='" + txtProducto.Text + "',Precio='" + txtPrecio.Text +
                          "',Forma='" + cbForma.Text + "',Color='" + cbColor.Text + "',Talla='" + cbTalla.Text + "',Comprador='" + txtDestinado.Text + 
-                        "',Telefono='" + txtTelefono.Text + "',Direccion='" + txtDireccion.Text + "' where Id=" + txtPedido.Text;
+                        "',Telefono='" + txtTelefono.Text + "',Direccion='" + txtDireccion.Text + "' where Idpedido=" + txtPedido.Text;
                     cmd.ExecuteNonQuery();
                     MostrarDatos();
-                    MessageBox.Show("Datos del alumno Actualizados...");
+                    MessageBox.Show("Datos del pedido Actualizados...");
                     LimpiaTodo();
                 }
             }

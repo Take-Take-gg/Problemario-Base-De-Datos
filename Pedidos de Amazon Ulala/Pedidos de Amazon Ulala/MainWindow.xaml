@@ -77,7 +77,7 @@
                 <Button Name="btnNuevo" Content="Nuevo" FontSize="25" Width="120" Margin="5" Background="#c0ffb3" Click="BtnNuevo_Click" />
                 <Button Name="btnEditar" Content="Editar" FontSize="25" Width="120" Margin="5" Background="#c0ffb3" Click="BtnEditar_Click" />
                 <Button Name="btnEliminar" Content="Eliminar" FontSize="25" Width="120" Margin="5" Background="#c0ffb3" Click="BtnEliminar_Click" />
-                <Button Name="btnCancelar" Content="Cancelar" FontSize="25" Width="120" Margin="5" Background="#c0ffb3"  Click="BtnCancelar_Click" />
+                <Button Name="btnCancelar" Content="Limpiar" FontSize="25" Width="120" Margin="5" Background="#c0ffb3"  Click="BtnCancelar_Click" />
                 <Button Name="btnSalir" Content="Salir" FontSize="25" Width="120" Margin="5" Background="#b22222" Foreground="#272121" Click="BtnSalir_Click" />
             </WrapPanel>
             <Label Content="No encontre Registros." Name="lbContenido" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="#FFE10000"></Label>
