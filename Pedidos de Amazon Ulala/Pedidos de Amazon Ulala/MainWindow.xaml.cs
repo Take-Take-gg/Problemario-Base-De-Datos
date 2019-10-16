@@ -101,7 +101,7 @@ namespace Pedidos_de_Amazon_Ulala
                 if (con.State != ConnectionState.Open)
                     con.Open();
                 cmd.Connection = con;
-                cmd.CommandText = "delete from Pedidos where Id=" + row["Id"].ToString();
+                cmd.CommandText = "delete from Pedidos where IdPedido=" + row["IdPedido"].ToString();
                 cmd.ExecuteNonQuery();
                 MostrarDatos();
                 MessageBox.Show("Pedido Eliminado (cancelado)");
